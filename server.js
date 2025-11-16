@@ -51,6 +51,18 @@ function formatTime(dateString) {
   return `${displayHours}:${minutes} ${ampm}`;
 }
 
+function formatLastUpdated() {
+  const now = new Date();
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const displayHours = hours % 12 || 12;
+  
+  return `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()} at ${displayHours}:${minutes} ${ampm}`;
+}
+
 // API endpoint to get calendar events
 app.get('/api/events', async (req, res) => {
   try {
@@ -108,12 +120,15 @@ app.get('/', async (req, res) => {
       `;
     });
 
+    const lastUpdated = formatLastUpdated();
+    
     const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="3600">
   <title>Calendar</title>
   <style>
     * {
@@ -182,7 +197,7 @@ app.get('/', async (req, res) => {
   <h1>Upcoming Events</h1>
   <div class="calendar-name">${calendarInfo.data.summary}</div>
   ${eventsHtml || '<p>No upcoming events</p>'}
-  <div class="refresh-note">Refresh page to update</div>
+  <div class="refresh-note">Last updated: ${lastUpdated}<br>Auto-refresh every hour</div>
 </body>
 </html>
     `;
