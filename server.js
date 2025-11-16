@@ -36,14 +36,15 @@ const CALENDAR_ID = process.env.CALENDAR_ID || 'primary';
 // Set TIMEZONE in .env to your timezone (e.g., 'America/New_York', 'Europe/London')
 const TIMEZONE = process.env.TIMEZONE || 'Europe/Berlin';
 
+// German date/time labels
+const DAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+const MONTHS = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+
 // Format date for display
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const days = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
-  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
-  
   const localDate = new Date(date.toLocaleString('en-US', { timeZone: TIMEZONE }));
-  return `${days[localDate.getDay()]}, ${localDate.getDate()}. ${months[localDate.getMonth()]}`;
+  return `${DAYS[localDate.getDay()]}, ${localDate.getDate()}. ${MONTHS[localDate.getMonth()]}`;
 }
 
 function formatTime(dateString) {
@@ -58,12 +59,10 @@ function formatTime(dateString) {
 function formatLastUpdated() {
   const now = new Date();
   const localNow = new Date(now.toLocaleString('en-US', { timeZone: TIMEZONE }));
-  const days = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
-  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
   const hours = localNow.getHours().toString().padStart(2, '0');
   const minutes = localNow.getMinutes().toString().padStart(2, '0');
   
-  return `${days[localNow.getDay()]}, ${localNow.getDate()}. ${months[localNow.getMonth()]} um ${hours}:${minutes}`;
+  return `${DAYS[localNow.getDay()]}, ${localNow.getDate()}. ${MONTHS[localNow.getMonth()]} um ${hours}:${minutes}`;
 }
 
 // API endpoint to get calendar events
