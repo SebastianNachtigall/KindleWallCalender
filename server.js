@@ -101,7 +101,7 @@ app.get('/', async (req, res) => {
     const response = await calendar.events.list({
       calendarId: CALENDAR_ID,
       timeMin: new Date().toISOString(),
-      maxResults: 10,
+      maxResults: 20,
       singleEvents: true,
       orderBy: 'startTime',
     });
