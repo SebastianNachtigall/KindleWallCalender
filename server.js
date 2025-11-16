@@ -196,7 +196,7 @@ app.get('/', async (req, res) => {
   </style>
 </head>
 <body>
-  <h1>Anstehende Termine</h1>
+  <h1>Termine für Emma, Jule und Basti 🧙‍♀️ 🦸‍♂️ 🦸‍♀</h1>
   <div class="calendar-name">${calendarInfo.data.summary}</div>
   ${eventsHtml || '<p>Keine anstehenden Termine</p>'}
   <div class="refresh-note">Zuletzt aktualisiert: ${lastUpdated}<br>Automatische Aktualisierung jede Stunde</div>
