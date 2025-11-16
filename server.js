@@ -32,35 +32,38 @@ const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 // To use a different calendar, set CALENDAR_ID in .env to the calendar's ID
 const CALENDAR_ID = process.env.CALENDAR_ID || 'primary';
 
+// Timezone - defaults to 'Europe/Berlin'
+// Set TIMEZONE in .env to your timezone (e.g., 'America/New_York', 'Europe/London')
+const TIMEZONE = process.env.TIMEZONE || 'Europe/Berlin';
+
 // Format date for display
 function formatDate(dateString) {
   const date = new Date(dateString);
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
-  return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
+  const localDate = new Date(date.toLocaleString('en-US', { timeZone: TIMEZONE }));
+  return `${days[localDate.getDay()]}, ${months[localDate.getMonth()]} ${localDate.getDate()}`;
 }
 
 function formatTime(dateString) {
   const date = new Date(dateString);
-  const hours = date.getHours();
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const displayHours = hours % 12 || 12;
+  const localDate = new Date(date.toLocaleString('en-US', { timeZone: TIMEZONE }));
+  const hours = localDate.getHours().toString().padStart(2, '0');
+  const minutes = localDate.getMinutes().toString().padStart(2, '0');
   
-  return `${displayHours}:${minutes} ${ampm}`;
+  return `${hours}:${minutes}`;
 }
 
 function formatLastUpdated() {
   const now = new Date();
+  const localNow = new Date(now.toLocaleString('en-US', { timeZone: TIMEZONE }));
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const hours = now.getHours();
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const displayHours = hours % 12 || 12;
+  const hours = localNow.getHours().toString().padStart(2, '0');
+  const minutes = localNow.getMinutes().toString().padStart(2, '0');
   
-  return `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()} at ${displayHours}:${minutes} ${ampm}`;
+  return `${days[localNow.getDay()]}, ${months[localNow.getMonth()]} ${localNow.getDate()} at ${hours}:${minutes}`;
 }
 
 // API endpoint to get calendar events
