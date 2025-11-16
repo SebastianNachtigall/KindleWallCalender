@@ -39,11 +39,11 @@ const TIMEZONE = process.env.TIMEZONE || 'Europe/Berlin';
 // Format date for display
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const days = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
   
   const localDate = new Date(date.toLocaleString('en-US', { timeZone: TIMEZONE }));
-  return `${days[localDate.getDay()]}, ${months[localDate.getMonth()]} ${localDate.getDate()}`;
+  return `${days[localDate.getDay()]}, ${localDate.getDate()}. ${months[localDate.getMonth()]}`;
 }
 
 function formatTime(dateString) {
@@ -58,12 +58,12 @@ function formatTime(dateString) {
 function formatLastUpdated() {
   const now = new Date();
   const localNow = new Date(now.toLocaleString('en-US', { timeZone: TIMEZONE }));
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const days = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
   const hours = localNow.getHours().toString().padStart(2, '0');
   const minutes = localNow.getMinutes().toString().padStart(2, '0');
   
-  return `${days[localNow.getDay()]}, ${months[localNow.getMonth()]} ${localNow.getDate()} at ${hours}:${minutes}`;
+  return `${days[localNow.getDay()]}, ${localNow.getDate()}. ${months[localNow.getMonth()]} um ${hours}:${minutes}`;
 }
 
 // API endpoint to get calendar events
@@ -117,7 +117,7 @@ app.get('/', async (req, res) => {
       eventsHtml += `
         <div class="event">
           <div class="event-date">${formatDate(start)}</div>
-          <div class="event-time">${isAllDay ? 'All Day' : formatTime(start)}</div>
+          <div class="event-time">${isAllDay ? 'Ganztägig' : formatTime(start)}</div>
           <div class="event-title">${event.summary || 'No title'}</div>
         </div>
       `;
@@ -197,10 +197,10 @@ app.get('/', async (req, res) => {
   </style>
 </head>
 <body>
-  <h1>Upcoming Events</h1>
+  <h1>Anstehende Termine</h1>
   <div class="calendar-name">${calendarInfo.data.summary}</div>
-  ${eventsHtml || '<p>No upcoming events</p>'}
-  <div class="refresh-note">Last updated: ${lastUpdated}<br>Auto-refresh every hour</div>
+  ${eventsHtml || '<p>Keine anstehenden Termine</p>'}
+  <div class="refresh-note">Zuletzt aktualisiert: ${lastUpdated}<br>Automatische Aktualisierung jede Stunde</div>
 </body>
 </html>
     `;
