@@ -37,7 +37,7 @@ const CALENDAR_ID = process.env.CALENDAR_ID || 'primary';
 const TIMEZONE = process.env.TIMEZONE || 'Europe/Berlin';
 
 // German date/time labels
-const DAYS = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag];
+const DAYS = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
 const MONTHS = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
 // Format date for display
