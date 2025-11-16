@@ -143,43 +143,43 @@ app.get('/', async (req, res) => {
       font-family: Arial, sans-serif;
       background: #fff;
       color: #000;
-      padding: 20px;
-      max-width: 600px;
-      margin: 0 auto;
+      padding: 15px;
+      max-width: 100%;
+      margin: 0;
     }
     
     h1 {
-      font-size: 36px;
-      margin-bottom: 30px;
+      font-size: 32px;
+      margin-bottom: 10px;
       font-weight: bold;
     }
     
     .calendar-name {
-      font-size: 20px;
+      font-size: 18px;
       color: #666;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     
     .event {
-      padding: 20px 0;
-      margin-bottom: 15px;
-    }
-    
-    .event-datetime {
-      font-size: 30px;
-      font-weight: bold;
+      padding: 15px 0;
       margin-bottom: 10px;
     }
     
+    .event-datetime {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
     .event-title {
-      font-size: 26px;
-      line-height: 1.4;
+      font-size: 24px;
+      line-height: 1.3;
     }
     
     .refresh-note {
-      margin-top: 40px;
+      margin-top: 30px;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       color: #999;
     }
   </style>
