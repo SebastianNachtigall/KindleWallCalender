@@ -113,10 +113,10 @@ app.get('/', async (req, res) => {
       const start = event.start.dateTime || event.start.date;
       const isAllDay = !event.start.dateTime;
       
+      const timeDisplay = isAllDay ? 'Ganztägig' : formatTime(start);
       eventsHtml += `
         <div class="event">
-          <div class="event-date">${formatDate(start)}</div>
-          <div class="event-time">${isAllDay ? 'Ganztägig' : formatTime(start)}</div>
+          <div class="event-datetime">${formatDate(start)} • ${timeDisplay}</div>
           <div class="event-title">${event.summary || 'No title'}</div>
         </div>
       `;
@@ -162,25 +162,18 @@ app.get('/', async (req, res) => {
     
     .event {
       padding: 20px 0;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
     
-    .event-date {
-      font-size: 22px;
-      color: #666;
-      margin-bottom: 8px;
-    }
-    
-    .event-time {
-      font-size: 28px;
+    .event-datetime {
+      font-size: 30px;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     
     .event-title {
       font-size: 26px;
       line-height: 1.4;
-      margin-bottom: 15px;
     }
     
     .refresh-note {
