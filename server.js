@@ -149,48 +149,44 @@ app.get('/', async (req, res) => {
     }
     
     h1 {
-      font-size: 28px;
-      margin-bottom: 5px;
-      border-bottom: 2px solid #000;
-      padding-bottom: 10px;
+      font-size: 36px;
+      margin-bottom: 30px;
+      font-weight: bold;
     }
     
     .calendar-name {
-      font-size: 14px;
+      font-size: 20px;
       color: #666;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     
     .event {
-      border-bottom: 1px solid #ccc;
-      padding: 15px 0;
-    }
-    
-    .event:last-child {
-      border-bottom: none;
+      padding: 20px 0;
+      margin-bottom: 10px;
     }
     
     .event-date {
-      font-size: 14px;
+      font-size: 22px;
       color: #666;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
     
     .event-time {
-      font-size: 16px;
+      font-size: 28px;
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
     
     .event-title {
-      font-size: 18px;
+      font-size: 26px;
       line-height: 1.4;
+      margin-bottom: 15px;
     }
     
     .refresh-note {
-      margin-top: 30px;
+      margin-top: 40px;
       text-align: center;
-      font-size: 12px;
+      font-size: 18px;
       color: #999;
     }
   </style>
